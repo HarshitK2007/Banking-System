@@ -7,8 +7,7 @@
 from pickle import *
 from time import strftime,sleep
 
-layout=('accountnum','password','name','age','income',
-        'started','balance','[transaction]')
+layout=('accountnum','password','name','age','income','started','balance','[transaction]')
 
 try:
     with open("bank.dat","rb"):...
