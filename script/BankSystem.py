@@ -1,9 +1,3 @@
-# 
-# 
-# 
-# 
-# 
-# 
 from pickle import *
 from time import strftime,sleep
 
@@ -56,7 +50,6 @@ def passinp(x=0):
     passinp(x)
 
 def accinp():
-
     try:
         user=int(input("Enter your 12 digit account number:"))
         if len(str(user))!=12:raise Exception
@@ -66,7 +59,6 @@ def accinp():
     return user
 
 def allaccnum():
-
     with open("bank.dat","rb") as file:
         main=[]
         try:
@@ -353,95 +345,96 @@ anything: To restart.
         
     user=input("[1-10] or exit:").lower()
 
-    if user=="1":
-        name=input("Enter your name:").capitalize().replace(" ","_")
-        age=input("Enter your age:")
-        income=input("Enter your income:")
-        try:
-            if int(age) <18 or int(income)<5000:
-                print("You arent not qualified to open your account here")
+    match user:
+
+        case "1":
+            name=input("Enter your name:").capitalize().replace(" ","_")
+            age=input("Enter your age:")
+            income=input("Enter your income:")
+            try:
+                if int(age) <18 or int(income)<5000:
+                    print("You arent not qualified to open your account here")
+                    bank()
+            except Exception:
+                print("Only digits please")
                 bank()
-        except Exception:
-            print("Only digits please")
-            bank()
-        open_account(name,age,income) 
+            open_account(name,age,income) 
 
-    elif user=="2":
-        accnum=accinp()
-        password=passinp(1)
-        close_account(accnum,password)
+        case "2":
+            accnum=accinp()
+            password=passinp(1)
+            close_account(accnum,password)
 
-    elif user=="3":
-        accnum=accinp()
-        password=passinp(1)
-        try:
-            amount=int(input("Enter amount:"))
-        except Exception:
-            print("Only digits please")
-            bank()
-        deposit_money(accnum,password,amount)
+        case "3":
+            accnum=accinp()
+            password=passinp(1)
+            try:
+                amount=int(input("Enter amount:"))
+            except Exception:
+                print("Only digits please")
+                bank()
+            deposit_money(accnum,password,amount)
 
-    elif user=="4":
-        accnum=accinp()
-        password=passinp(1)
-        try:
-            amount=int(input("Enter amount:"))
-        except Exception:
-            print("Only digits please")
-            bank()
-        withdraw_money(accnum,password,amount)
+        case "4":
+            accnum=accinp()
+            password=passinp(1)
+            try:
+                amount=int(input("Enter amount:"))
+            except Exception:
+                print("Only digits please")
+                bank()
+            withdraw_money(accnum,password,amount)
 
-    elif user=="5":
-        accnum=accinp()
-        password=passinp(1)
-        balance(accnum,password)
+        case "5":
+            accnum=accinp()
+            password=passinp(1)
+            balance(accnum,password)
 
-    elif user=="6":
-        accnum=accinp()
-        password=passinp(1)
-        last_transaction(accnum,password)
+        case "6":
+            accnum=accinp()
+            password=passinp(1)
+            last_transaction(accnum,password)
 
-    elif user=="7":
-        accnum=accinp()
-        password=passinp(1)
-        all_transactions(accnum,password)
+        case "7":
+            accnum=accinp()
+            password=passinp(1)
+            all_transactions(accnum,password)
 
-    elif user=="8":
-        accnum=accinp()
-        password=passinp(1)
-        user_details(accnum,password)
+        case "8":
+            accnum=accinp()
+            password=passinp(1)
+            user_details(accnum,password)
 
-    elif user=="9":
-        accnum=accinp()
-        oldpass=passinp(1)
-        newpass=passinp()
-        change_password(accnum,oldpass,newpass)
-    
-    elif user=="10":
-        accnum=accinp()
-        password=passinp(1)
-        reciever=accinp()
-        try:
-            amount=int(input("Enter amount:"))
-        except Exception:
-            print("Only digits please")
-            bank()
-        transfer(accnum,password,reciever,amount)
+        case "9":
+            accnum=accinp()
+            oldpass=passinp(1)
+            newpass=passinp()
+            change_password(accnum,oldpass,newpass)
+        
+        case "10":
+            accnum=accinp()
+            password=passinp(1)
+            reciever=accinp()
+            try:
+                amount=int(input("Enter amount:"))
+            except Exception:
+                print("Only digits please")
+                bank()
+            transfer(accnum,password,reciever,amount)
 
-    elif user=="11":
-        accnum=accinp()
-        password=passinp(1)
-        account_graph(accnum,password)
+        case "11":
+            accnum=accinp()
+            password=passinp(1)
+            account_graph(accnum,password)
 
-    elif user=="12":
-        show_all(password="")
+        case "12":
+            show_all(password="")
 
-    elif user=="exit" or user=="e":
-        print("Thank you for using our service")
-        exit()
+        case "exit"|"e":
+            print("Thank you for using our service")
+            exit()
 
-    else:bank()
+        case _:bank()
 
+if __name__ == "__main__":
     bank()
-
-bank()
